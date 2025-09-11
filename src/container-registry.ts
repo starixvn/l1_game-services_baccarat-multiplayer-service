@@ -1,7 +1,15 @@
 import awilix from "awilix";
 import { Core, Table } from "sc-game-base";
 import { Bets, Rounds, TmpBets, Results, BetLogs } from "./models/index";
-import { RoundResultConsumer, SettleGameRoundConsumer, UserSigninConsumer, RebetConsumer, PlayerResultBoardManager } from "./consumers";
+import {
+    RoundResultConsumer,
+    SettleGameRoundConsumer,
+    UserSigninConsumer,
+    RebetConsumer,
+    PlayerResultBoardManager,
+    PlaceBetConsumer,
+    ProvablyFairConsumer,
+} from "./consumers";
 import { PlayerResultBoardPublisher } from "./publishers";
 import { GameBot, GameCron, ProcessBetQueue } from "./crons";
 import SocketRouter from "./routers/socket-router";
@@ -9,12 +17,6 @@ import SocketRouter from "./routers/socket-router";
 const { asClass, asValue } = awilix;
 
 export default class ContainerRegistry extends Table.TableContainerRegistry {
-    registerPFSettings() {
-        this.container.register({
-            maxCombinedClientSeeds: asValue(5),
-        });
-    }
-
     registerModels() {
         super.registerModels();
 
@@ -31,6 +33,8 @@ export default class ContainerRegistry extends Table.TableContainerRegistry {
         super.registerConsumers();
 
         this.container.register({
+            placeBetConsumer: asClass(PlaceBetConsumer).singleton(),
+            provablyFairConsumer: asClass(ProvablyFairConsumer).singleton(),
             roundResultConsumer: asClass(RoundResultConsumer).singleton(),
             userSignInConsumer: asClass(UserSigninConsumer).singleton(),
             settleGameRoundConsumer: asClass(SettleGameRoundConsumer).singleton().proxy(),

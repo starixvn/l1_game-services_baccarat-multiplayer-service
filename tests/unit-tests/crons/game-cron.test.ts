@@ -66,7 +66,7 @@ describe("GameCron", () => {
 
     describe("proceed", () => {
         it("should reset board and publish board update when remainingTime equals placingBets", async () => {
-            gameCron.definition = { durations: { placingBets: 30, shakeThePlateDuration: 10 } } as any;
+            gameCron.definition = { durations: { placingBets: 30 } } as any;
             gameCron.gameData = { remainingTime: 30 } as any;
 
             await gameCron.proceed();
@@ -79,7 +79,7 @@ describe("GameCron", () => {
         });
 
         it("should not reset board or publish board update when remainingTime does not equal placingBets", async () => {
-            gameCron.definition = { durations: { placingBets: 30, shakeThePlateDuration: 10 } } as any;
+            gameCron.definition = { durations: { placingBets: 30 } } as any;
             gameCron.gameData = { remainingTime: 10 } as any;
 
             await gameCron.proceed();

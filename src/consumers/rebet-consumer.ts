@@ -1,5 +1,5 @@
 import { helpers } from "sc-common";
-import BasePlaceBetConsumer from "sc-game-base/src/core/event-consumers/place-bet-consumer";
+import PlaceBetConsumer from "./place-bet-consumer";
 
 type Payload = {
     betChoices: Record<string, number>;
@@ -11,7 +11,7 @@ type Payload = {
     betChoice?: string;
     m?: string;
 };
-export default class RebetConsumer extends BasePlaceBetConsumer {
+export default class RebetConsumer extends PlaceBetConsumer {
     declare validateBetRequest: (
         player: any,
         betChoices: string | Record<string, number>,

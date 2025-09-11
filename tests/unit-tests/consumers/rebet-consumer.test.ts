@@ -20,13 +20,12 @@ describe("RebetConsumer", () => {
     let mockPlayer: any;
     let mockPayload: any;
     const definition = {
-        id: 148,
-        name: "SeDieMultiplayer",
+        id: 150,
+        name: "BaccaratMultiplayer",
         durations: {
-            wholeRound: 23,
+            wholeRound: 30,
             placingBets: 18,
             lockingBet: 3,
-            shakeThePlateDuration: 1,
         },
         choices: Object.values(BET_CHOICES),
         hedgeBetGroups: [[BET_CHOICES.player, BET_CHOICES.banker]],
