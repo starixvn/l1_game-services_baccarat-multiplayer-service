@@ -4,7 +4,7 @@ describe("ProvablyFairConsumer", () => {
     describe("updateClientSeedsFromBets", () => {
         it("should set client seeds to empty array", async () => {
             // Arrange
-            const provablyFairConsumer = new ProvablyFairConsumer({} as any, null, null, 0);
+            const provablyFairConsumer = new ProvablyFairConsumer({ pf: {} } as any, null, null, 0);
 
             // Act
             await provablyFairConsumer.updateClientSeedsFromBets();
