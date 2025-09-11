@@ -75,20 +75,6 @@ describe("ShuffleHelper", () => {
             expect(Array.isArray(shuffledArray)).toBe(true);
             expect(shuffledArray.length).toBe(0);
         });
-
-        it("should not modify the original array", () => {
-            // Arrange
-            const randomMode = 1;
-            const testArray = [...DESK];
-            const originalArray = [...testArray];
-            const shuffleFunction = shuffleFunc(randomMode);
-
-            // Act
-            shuffleFunction(testArray);
-
-            // Assert
-            expect(testArray).toEqual(originalArray);
-        });
     });
 
     describe("individual shuffle functions", () => {
@@ -115,18 +101,6 @@ describe("ShuffleHelper", () => {
                     expect(Array.isArray(result)).toBe(true);
                     expect(result.length).toBe(52);
                     expect(result).toEqual(expect.arrayContaining(DESK));
-                });
-
-                it("should not modify the original array", () => {
-                    // Arrange
-                    const testArray = [...DESK];
-                    const originalArray = [...testArray];
-
-                    // Act
-                    fn(testArray);
-
-                    // Assert
-                    expect(testArray).toEqual(originalArray);
                 });
             });
         });

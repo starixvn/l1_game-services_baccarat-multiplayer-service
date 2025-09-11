@@ -1,45 +1,28 @@
-import { Hand } from "../types";
-import BaccaratGame, { Actions } from "./baccarat-game";
-import { getCardFromString, getCardValue } from "./card-helper";
+import BaccaratGame from "./baccarat-game";
+import BaccaratPlayer from "./baccarat-player";
+import { getCardFromString } from "./card-helper";
 
 const generateResult = (desk: string) => {
     const cards =
         desk
-            .match(/.{2}/g)
+            .match(/[^♥♦♣♠]*[♥♦♣♠]/g)
             ?.slice(0, 6)
             .map((card) => getCardFromString(card)) || [];
+    if (cards.length < 6) {
+        return { player: new BaccaratPlayer(), banker: new BaccaratPlayer() };
+    }
     const baccaratGame = new BaccaratGame(cards);
-    let action = "";
-
-    do {
-        action = baccaratGame.getAction();
-        (baccaratGame[action as keyof typeof baccaratGame] as Function)();
-    } while (action !== Actions.finalize);
-
-    return { player: baccaratGame.player, banker: baccaratGame.banker };
-};
-
-const getTotalScore = (hand: Hand) => {
-    return Object.values(hand).reduce((result, card) => {
-        const cardValue = getCardValue(card);
-        return (result + cardValue) % 10;
-    }, 0);
-};
-
-const hasPair = (hand: Hand) => {
-    const { card1, card2 } = hand;
-
-    return card1.rank === card2.rank;
+    return baccaratGame.getResult();
 };
 
 const settlementRuleEntries = Object.entries({
-    player: ({ player, banker }: { player: Hand; banker: Hand }) => getTotalScore(player) > getTotalScore(banker),
-    banker: ({ player, banker }: { player: Hand; banker: Hand }) => getTotalScore(player) < getTotalScore(banker),
-    tie: ({ player, banker }: { player: Hand; banker: Hand }) => getTotalScore(player) === getTotalScore(banker),
-    anyPair: ({ player, banker }: { player: Hand; banker: Hand }) => hasPair(player) || hasPair(banker),
+    player: ({ player, banker }: { player: BaccaratPlayer; banker: BaccaratPlayer }) => player.score > banker.score,
+    banker: ({ player, banker }: { player: BaccaratPlayer; banker: BaccaratPlayer }) => player.score < banker.score,
+    tie: ({ player, banker }: { player: BaccaratPlayer; banker: BaccaratPlayer }) => player.score === banker.score,
+    anyPair: ({ player, banker }: { player: BaccaratPlayer; banker: BaccaratPlayer }) => player.hasPair() || banker.hasPair(),
 });
 
-const getSettlementResult = (roundResult: { player: Hand; banker: Hand }) => {
+const getSettlementResult = (roundResult: { player: BaccaratPlayer; banker: BaccaratPlayer }) => {
     return settlementRuleEntries.reduce((result: Record<string, boolean>, [choice, rule]) => {
         result[choice] = rule(roundResult) || false;
         return result;

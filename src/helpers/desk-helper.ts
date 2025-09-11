@@ -3,7 +3,7 @@ import { shuffleFunc } from "./shuffle-helper";
 
 export const generateDesk = (randomMode: number) => {
     const shuffle = shuffleFunc(randomMode);
-    return shuffle(DESK) as string[];
+    return shuffle([...DESK]) as string[];
 };
 
 export const cutDeckAtIndex = (serverSeed: string, cutIndex: number) => {

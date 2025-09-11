@@ -9,9 +9,3 @@ export type SettlementResult = {
     tie: boolean;
     anyPair: boolean;
 };
-
-export type Hand = {
-    card1: Card;
-    card2: Card;
-    card3?: Card;
-};

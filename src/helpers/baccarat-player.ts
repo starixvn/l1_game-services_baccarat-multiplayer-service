@@ -33,4 +33,8 @@ export default class BaccaratPlayer {
     getNumberOfCards() {
         return [this.card1, this.card2, this.card3].filter((card) => !!card).length;
     }
+
+    hasPair() {
+        return !!this.card1 && !!this.card2 && this.card1.rank === this.card2.rank;
+    }
 }

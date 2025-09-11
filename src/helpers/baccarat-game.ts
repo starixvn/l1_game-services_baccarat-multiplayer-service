@@ -106,6 +106,16 @@ class BaccaratGame {
             (score.banker === 6 && thirdCardOfPlayer >= 6 && thirdCardOfPlayer <= 7)
         );
     }
+
+    getResult() {
+        let action = "";
+        do {
+            action = this.getAction();
+            (this[action as keyof typeof this] as Function)();
+        } while (action !== Actions.finalize);
+
+        return { player: this.player, banker: this.banker };
+    }
 }
 
 export default BaccaratGame;
