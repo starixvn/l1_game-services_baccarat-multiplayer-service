@@ -7,7 +7,7 @@ import { randomInt } from "crypto";
 
 const chance = new Chance();
 
-export const mathRandom = () => {
+const mathRandom = () => {
     return Math.random(); // NOSONAR
 };
 
@@ -62,25 +62,25 @@ const shuffleCards = (deskOfCards: string[]) => {
     }
 };
 
-const shuffle1 = (arr: string[]) => {
+export const shuffle1 = (arr: string[]) => {
     const deskOfCards = [...arr];
 
     shuffleCards(deskOfCards);
     shuffleCards(deskOfCards);
     shuffleCards(deskOfCards);
 
-    return deskOfCards.slice(0, 2);
+    return deskOfCards;
 };
 
-const shuffle2 = (arr: string[]) => {
+export const shuffle2 = (arr: string[]) => {
     return chance.shuffle(chance.shuffle(chance.shuffle(arr)));
 };
 
-const shuffle3 = (arr: string[]) => {
+export const shuffle3 = (arr: string[]) => {
     return d3Shuffle(d3Shuffle(d3Shuffle(arr)));
 };
 
-const shuffle4 = (arr: string[]) => {
+export const shuffle4 = (arr: string[]) => {
     let result = arr;
     const r = new RandomJS(MersenneTwister19937.autoSeed());
 
@@ -91,7 +91,7 @@ const shuffle4 = (arr: string[]) => {
     return result;
 };
 
-const shuffle5 = (arr: string[]) => {
+export const shuffle5 = (arr: string[]) => {
     return _.shuffle(_.shuffle(_.shuffle(arr)));
 };
 
@@ -111,11 +111,11 @@ const shuffleCards2 = (array: string[], mode: number) => {
     return array;
 };
 
-const shuffle6 = (arr: string[]) => {
+export const shuffle6 = (arr: string[]) => {
     return shuffleCards2(arr, 1);
 };
 
-const shuffle7 = (arr: string[]) => {
+export const shuffle7 = (arr: string[]) => {
     return shuffleCards2(arr, 2);
 };
 
