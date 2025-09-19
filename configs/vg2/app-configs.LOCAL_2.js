@@ -31,7 +31,7 @@ export default {
     },
     sentry: {
         sentryUrl: "https://8eb9632f2663e57c838ec83febbee14f@sentry-k8s.lumigame.com/4",
-        logIdentifier: "baccarate-multiplayer",
+        logIdentifier: "baccarat-multiplayer",
         env: "LOCAL_2",
     },
     authenticateSettings: {
