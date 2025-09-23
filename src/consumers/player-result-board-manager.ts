@@ -50,7 +50,7 @@ export default class PlayerResultBoardManager {
 
         const player = playerResultBoard.players[index];
         const rate = player.rate ?? 1;
-        player.winAmount = bet.betwin * rate;
+        player.winAmount = bet.betWin * rate;
     }
 
     resetForNewRound() {

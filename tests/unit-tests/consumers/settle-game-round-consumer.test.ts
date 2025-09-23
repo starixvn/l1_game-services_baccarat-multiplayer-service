@@ -108,6 +108,7 @@ describe("SettleGameRoundConsumer", () => {
                         clientSeed: "seed1",
                         rate: 1.0,
                         betwin: 200,
+                        betWin: 200,
                     },
                 ];
                 const settlementResult = { choice1: true, choice2: false };
@@ -176,6 +177,7 @@ describe("SettleGameRoundConsumer", () => {
                         clientSeed: "seed1",
                         rate: 1.0,
                         betwin: 200,
+                        betWin: 200,
                     },
                     {
                         uid: "player2",
@@ -190,6 +192,7 @@ describe("SettleGameRoundConsumer", () => {
                         clientSeed: "seed2",
                         rate: 1.0,
                         betwin: 0,
+                        betWin: 0,
                     },
                 ];
                 const settlementResult = { choice1: true, choice2: false };

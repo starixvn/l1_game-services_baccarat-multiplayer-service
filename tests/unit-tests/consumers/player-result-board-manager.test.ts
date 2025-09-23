@@ -245,7 +245,7 @@ describe("PlayerResultBoardManager", () => {
                 session: { multiplier: 2.0, currencyCode: "USD" },
             };
             manager.addOrUpdatePlayer(player, 100, 1);
-            const bet = { uid: "u1", betwin: 200 };
+            const bet = { uid: "u1", betWin: 200 };
             manager.updateWinAmounts(bet);
             expect(gameData.playerResultBoard.players[0].winAmount).toBe(400); // 200 * 2.0 (stored rate)
         });
@@ -253,7 +253,7 @@ describe("PlayerResultBoardManager", () => {
         it("should update win amounts for a player with default rate", () => {
             const player = { UID: "u1", profile: { name: "Alice" } };
             manager.addOrUpdatePlayer(player, 100, 1);
-            const bet = { uid: "u1", betwin: 200 };
+            const bet = { uid: "u1", betWin: 200 };
             manager.updateWinAmounts(bet);
             expect(gameData.playerResultBoard.players[0].winAmount).toBe(200); // 200 * 1 (default rate)
         });
@@ -261,37 +261,37 @@ describe("PlayerResultBoardManager", () => {
         it("should set negative winAmount if no win", () => {
             const player = { UID: "u1", profile: { name: "Alice" } };
             manager.addOrUpdatePlayer(player, 100, 1);
-            const bet = { uid: "u1", betwin: 0 };
+            const bet = { uid: "u1", betWin: 0 };
             manager.updateWinAmounts(bet);
             expect(gameData.playerResultBoard.players[0].winAmount).toBe(0); // 0 * 1 = 0
         });
 
         it("should not update winAmount if player not found", () => {
-            const bet = { uid: "notfound", betwin: 100 };
+            const bet = { uid: "notfound", betWin: 100 };
             manager.updateWinAmounts(bet);
             expect(gameData.playerResultBoard.players.length).toBe(0);
         });
 
-        it("should handle case where betwin equals betAmount (break even)", () => {
+        it("should handle case where betWin equals betAmount (break even)", () => {
             const player = { UID: "u1", profile: { name: "Alice" } };
             manager.addOrUpdatePlayer(player, 100, 1);
-            const bet = { uid: "u1", betwin: 100 };
+            const bet = { uid: "u1", betWin: 100 };
             manager.updateWinAmounts(bet);
             expect(gameData.playerResultBoard.players[0].winAmount).toBe(100); // 100 * 1 = 100
         });
 
-        it("should handle case where betwin is greater than betAmount (big win)", () => {
+        it("should handle case where betWin is greater than betAmount (big win)", () => {
             const player = { UID: "u1", profile: { name: "Alice" } };
             manager.addOrUpdatePlayer(player, 10, 1);
-            const bet = { uid: "u1", betwin: 50 };
+            const bet = { uid: "u1", betWin: 50 };
             manager.updateWinAmounts(bet);
             expect(gameData.playerResultBoard.players[0].winAmount).toBe(50); // 50 * 1 = 50
         });
 
-        it("should handle case where betwin is less than betAmount (big loss)", () => {
+        it("should handle case where betWin is less than betAmount (big loss)", () => {
             const player = { UID: "u1", profile: { name: "Alice" } };
             manager.addOrUpdatePlayer(player, 10, 1);
-            const bet = { uid: "u1", betwin: 2 };
+            const bet = { uid: "u1", betWin: 2 };
             manager.updateWinAmounts(bet);
             expect(gameData.playerResultBoard.players[0].winAmount).toBe(2); // 2 * 1 = 2
         });
@@ -303,7 +303,7 @@ describe("PlayerResultBoardManager", () => {
                 session: { multiplier: 1.5, currencyCode: "EUR" },
             };
             manager.addOrUpdatePlayer(player, 100, 1);
-            const bet = { uid: "u1", betwin: 100 };
+            const bet = { uid: "u1", betWin: 100 };
             manager.updateWinAmounts(bet);
             expect(gameData.playerResultBoard.players[0].winAmount).toBeCloseTo(127.5, 10); // 100 * 1.275 (stored rate)
         });
@@ -313,7 +313,7 @@ describe("PlayerResultBoardManager", () => {
             manager.addOrUpdatePlayer(player, 100, 1);
             // Manually remove rate to test fallback
             delete (gameData.playerResultBoard.players[0] as any).rate;
-            const bet = { uid: "u1", betwin: 200 };
+            const bet = { uid: "u1", betWin: 200 };
             manager.updateWinAmounts(bet);
             expect(gameData.playerResultBoard.players[0].winAmount).toBe(200); // 200 * 1 (fallback rate)
         });
@@ -545,7 +545,7 @@ describe("PlayerResultBoardManager", () => {
             expect(gameData.playerResultBoard.players[0].betAmount).toBe(-50);
         });
 
-        it("should handle updateWinAmounts with missing betwin", () => {
+        it("should handle updateWinAmounts with missing betWin", () => {
             const player = { UID: "u1", profile: { name: "Alice" } };
             manager.addOrUpdatePlayer(player, 100, 1);
             const bet = { uid: "u1" };
@@ -553,10 +553,10 @@ describe("PlayerResultBoardManager", () => {
             expect(gameData.playerResultBoard.players[0].winAmount).toBeNaN(); // 100 - undefined = NaN
         });
 
-        it("should handle updateWinAmounts with string betwin", () => {
+        it("should handle updateWinAmounts with string betWin", () => {
             const player = { UID: "u1", profile: { name: "Alice" } };
             manager.addOrUpdatePlayer(player, 100, 1);
-            const bet = { uid: "u1", betwin: "200" };
+            const bet = { uid: "u1", betWin: "200" };
             manager.updateWinAmounts(bet);
             expect(gameData.playerResultBoard.players[0].winAmount).toBe(200); // "200" * 1 = 200
         });

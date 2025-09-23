@@ -84,6 +84,7 @@ const userBetData = (uid) => {
             freeBet: false,
             uid: uid,
             betwin: 200,
+            betWin: 200,
             currency: "$US",
             player: 100,
             banker: 0,

@@ -7,6 +7,7 @@ const bet = {
     banker: { type: Number, default: 0 },
     tie: { type: Number, default: 0 },
     anyPair: { type: Number, default: 0 },
+    betWin: { type: Number, default: 0 },
 };
 
 const bets = mongoose.model(

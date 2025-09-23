@@ -54,6 +54,7 @@ describe("when get history", () => {
             expect(betLog).toHaveProperty("roundId");
             expect(betLog).toHaveProperty("name");
             expect(betLog).toHaveProperty("freeBet");
+            expect(betLog).toHaveProperty("betWin");
             expect(betLog).toHaveProperty("betwin");
             expect(betLog).toHaveProperty("odds");
 
@@ -92,6 +93,7 @@ describe("when get history", () => {
                 tie: 0,
                 anyPair: 0,
                 betwin: 200,
+                betWin: 200,
                 freeBet: false,
                 name: "NormalUser",
                 odds: {
