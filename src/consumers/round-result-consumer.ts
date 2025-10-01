@@ -23,8 +23,8 @@ export default class RoundResultConsumer extends Core.BaseEventConsumers.RoundRe
                     const playerCard = player[index];
                     const bankerCard = banker[index];
                     return [
-                        playerCard ? { rank: +playerCard.card, suit: +playerCard.type } : null,
-                        bankerCard ? { rank: +bankerCard.card, suit: +bankerCard.type } : null,
+                        playerCard?.card >= 0 ? { rank: +playerCard.card, suit: +playerCard.type } : null,
+                        bankerCard?.card >= 0 ? { rank: +bankerCard.card, suit: +bankerCard.type } : null,
                     ];
                 })
                 .filter((card) => !!card);
